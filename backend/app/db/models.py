@@ -1,5 +1,6 @@
 from app.db.session import Base
 from sqlalchemy import Column, INTEGER, String
+from app.db.session import engine
 
 
 class Book(Base):
@@ -14,5 +15,9 @@ class Book(Base):
     isbn_13 = Column(String)
     language = Column(String)
     edition = Column(String)
-    author = Column(String)
+    publication_date = Column(String)
 
+
+
+
+Base.metadata.create_all(bind=engine)
