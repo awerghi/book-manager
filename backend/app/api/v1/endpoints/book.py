@@ -24,7 +24,8 @@ async def get_all_books (db : db_dependency):
     for library_book in library_books:
         author_id = library_book.author_id
         author_info = db.query(Author).filter(Author.id == author_id).first()
-        library_book.author = {'name' : author_info.name, 'published_books' : author_info.number_of_published_books}
+        if author_info is not None:
+            library_book.author = {'name' : author_info.name, 'published_books' : author_info.number_of_published_books}
     return library_books
 
 @router.post("/library/add-book",status_code=status.HTTP_201_CREATED)
