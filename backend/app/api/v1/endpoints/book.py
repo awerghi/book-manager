@@ -17,6 +17,10 @@ router = APIRouter(
 @router.get("/library/books",status_code=status.HTTP_200_OK)
 async def get_all_books (db : db_dependency):
     library_books = db.query(Book).all()
+    # for each book in the library
+    # 1- get the author_id
+    # 2- search for author information by id in the author table
+    # 3- associate author information to response
     for library_book in library_books:
         author_id = library_book.author_id
         author_info = db.query(Author).filter(Author.id == author_id).first()
