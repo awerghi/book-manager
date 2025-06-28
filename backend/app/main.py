@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from starlette import status
 
 
-from app.api.v1.endpoints import book
+from app.api.v1.endpoints import book, author
 from app.core.config import settings
 from app.core.log import logger
 from app.db.session import engine
@@ -31,6 +31,7 @@ app  = FastAPI(
 )
 
 app.include_router(book.router)
+app.include_router(author.router)
 
 
 
