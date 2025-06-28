@@ -21,3 +21,11 @@ class BookModel(BaseModel):
     language : LanguageModel
     edition : str
     publication_date : str
+    author_id : int
+
+
+class AuthorModel (BaseModel):
+
+    id : int = Field(gt=0)
+    name : str
+    number_of_published_books : int
