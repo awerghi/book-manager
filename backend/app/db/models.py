@@ -1,5 +1,5 @@
 from app.db.session import Base
-from sqlalchemy import Column, INTEGER, String
+from sqlalchemy import Column, INTEGER, String, ForeignKey
 from app.db.session import engine
 
 
@@ -16,6 +16,15 @@ class Book(Base):
     language = Column(String)
     edition = Column(String)
     publication_date = Column(String)
+    author_id     = Column(INTEGER)
+
+class Author(Base):
+
+    __tablename__ = "author"
+
+    id = Column(INTEGER,primary_key=True)
+    name = Column(String)
+    number_of_published_books = Column(INTEGER)
 
 
 
