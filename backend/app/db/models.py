@@ -8,7 +8,7 @@ class Book(Base):
 
     __tablename__ = "Book"
 
-    id = Column(INTEGER,primary_key=True)
+    id = Column(INTEGER,primary_key=True,index=True)
     title = Column(String)
     subtitle = Column(String)
     isbn_10 = Column(String)

@@ -13,7 +13,6 @@ class LanguageModel (str,Enum):
 
 class BookModel(BaseModel):
 
-    id : int = Field(gt=0)
     title : str
     subtitle : str
     isbn_10 :  str = Field(min_length=10,max_length=10)
