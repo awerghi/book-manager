@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from starlette import status
+from prometheus_fastapi_instrumentator import Instrumentator
 
 
 from app.api.v1.endpoints import book, author
@@ -30,6 +31,7 @@ app  = FastAPI(
     prefix= settings.API_VERSION
 )
 
+Instrumentator().instrument(app).expose(app)
 app.include_router(book.router)
 app.include_router(author.router)
 
