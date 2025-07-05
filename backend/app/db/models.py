@@ -8,11 +8,10 @@ class Book(Base):
 
     __tablename__ = "Book"
 
-    id = Column(INTEGER,primary_key=True,index=True)
     title = Column(String)
     subtitle = Column(String)
     isbn_10 = Column(String)
-    isbn_13 = Column(String)
+    isbn_13 = Column(String,primary_key=True,unique=True)
     language = Column(String)
     edition = Column(String)
     publication_date = Column(String)

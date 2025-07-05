@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -13,14 +14,14 @@ class LanguageModel (str,Enum):
 
 class BookModel(BaseModel):
 
-    title : str
-    subtitle : str
-    isbn_10 :  str = Field(min_length=10,max_length=10)
-    isbn_13 : str = Field(min_length=13,max_length=13)
+    title : Optional[str] = ""
+    subtitle : Optional[str] = ""
+    isbn_10 :  Optional[str] = ""
+    isbn_13 : Optional[str] = ""
     language : LanguageModel
-    edition : str
-    publication_date : str
-    author_id : int
+    edition : Optional[str] = ""
+    publication_date : Optional[str] = ""
+    author_id : Optional[int] = 0
 
 
 class AuthorModel (BaseModel):
