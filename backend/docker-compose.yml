@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  # Prometheus service
+  book-app:
+    image : verghi/book-app:latest
+    container_name: book-manager
+    ports:
+      - "8000:8000"
+    networks:
+      - monitoring
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:v2.36.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - monitoring
+    depends_on:
+      - book-app
+    restart: always
+
+  # Grafana service
+  grafana:
+    image: grafana/grafana:8.3.0
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring
+    restart: always
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  grafana_data:
